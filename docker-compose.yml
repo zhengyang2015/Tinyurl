@@ -1,0 +1,39 @@
+nginx:
+    build: ./nginx
+    ports:
+        - "80:80"
+    links:
+        - "app1:app1"
+        - "app2:app2"
+        - "app3:app3"
+
+app1:
+    build: ./app
+#将app中的code传入tiny中，这样改app中的code可以实时反映在tiny中
+    volumes:
+        - "./app:/tiny"
+    ports:
+        - "3000"
+    links:
+        - "cache:redis"
+
+app2:
+    build: ./app
+    volumes:
+            - "./app:/tiny"
+    ports:
+        - "3000"
+    links:
+        - "cache:redis"
+
+app3:
+    build: ./app
+    volumes:
+            - "./app:/tiny"
+    ports:
+        - "3000"
+    links:
+        - "cache:redis"
+
+cache:
+    image: redis
