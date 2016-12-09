@@ -1,4 +1,4 @@
-var app = angular.module("tinyUrlApp", ["ngRoute", "ngResource", "chart.js"]);
+var app = angular.module("tinyUrlApp", ["ngRoute", "ngResource", "chart.js", "ui.bootstrap"]);
 
 //route管所有和url相关的
 app.config(function ($routeProvider) {

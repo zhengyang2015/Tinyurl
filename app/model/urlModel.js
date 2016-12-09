@@ -1,10 +1,13 @@
 var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
-var urlSchema = mongoose.Schema({
-    shortUrl:String,
-    longUrl:String
+var UrlSchema = new Schema({
+    shortUrl: String,
+    longUrl: String,
+    username: String,
+    creationTime: Date
 });
 
-var urlModel = mongoose.model("urlModel", urlSchema);
+var urlModel = mongoose.model("UrlModel", UrlSchema);
 
 module.exports = urlModel;

@@ -4,10 +4,37 @@
         <!--表单，包括输入框和提交按钮-->
         <form ng-submit="submit()">
             <div class="form-group">
-                <!--ng-model和后台的longUrl-->
+                <!--ng-model和后台的longUrl绑定-->
                 <input type="text" class="form-control" ng-model="longUrl">
             </div>
             <input type="submit" class="btn btn-primary" value="Get Your TinyUrl">
         </form>
+    </div>
+</div>
+
+<br>
+
+<div class="row" ng-show="isLoggedIn">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Long URL</th>
+                        <th>Short URL</th>
+                        <th>Statistics</th>
+                        <th>Creation Time</th>
+                    </tr>
+                <tbody>
+                    <tr ng-repeat="x in myUrls | orderBy: 'creationTime' : true">
+                        <th><a ng-href="{{x.longUrl}}" target="_blank">{{x.longUrl}}</a></th>
+                        <th><a ng-href="{{x.shortUrl}}" target="_blank">{{x.shortUrlToShow}}</a></th>
+                        <th><a ng-href="{{x.urlInfo}}" class="glyphicon glyphicon-stats"></a></th>
+                        <th>{{x.creationTime | date : "yyyy-MM-dd hh:mm a"}}</th>
+                    </tr>
+                </tbody>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>

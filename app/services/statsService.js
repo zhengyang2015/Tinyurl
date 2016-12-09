@@ -1,5 +1,10 @@
 var geoip = require("geoip-lite");
 var RequestModel = require("../model/requestModel");
+var redis = require("redis");
+//docker会将redis container的host地址和监听端口赋值给系统变量
+var host = process.env.REDIS_PORT_6379_TCP_ADDR;
+var port = process.env.REDIS_PORT_6379_TCP_PORT;
+var redisClient = redis.createClient(port, host);
 
 var logRequest = function (shortUrl, req) {
     var reqInfo = {};
@@ -20,7 +25,10 @@ var logRequest = function (shortUrl, req) {
     reqInfo.timestamp = new Date();
     //将信息存到mongodb
     var request = new RequestModel(reqInfo);
-    request.save();
+    request.save(function (err) {
+        //向shortUrl这个channel发送shortUrl这个message
+        redisClient.publish(shortUrl, shortUrl);
+    });
 }
 
 var getUrlInfo = function (shortUrl, info, callback) {
@@ -73,7 +81,7 @@ var getUrlInfo = function (shortUrl, info, callback) {
         },
         {
             $sort: {
-                //在上一步的基础上，根据时间排序
+                //在上一步的基础上，根据时间从小到大排序
                 timeStamp: -1
             }
         },

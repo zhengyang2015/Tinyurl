@@ -11,12 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "angular-chart.js": "^1.0.3",
+    "angular-ui-bootstrap": "^2.3.0",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-useragent": "^1.0.4",
     "geoip-lite": "^1.1.8",
+    "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.6.8",
-    "redis": "^2.6.3"
+    "node-uuid": "^1.4.7",
+    "redis": "^2.6.3",
+    "socket.io": "^1.7.1"
   },
   "devDependencies": {},
   "repository": {
